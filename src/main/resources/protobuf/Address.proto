@@ -1,0 +1,15 @@
+syntax = "proto3";
+package com.sequsoft.bufmark.protobuf;
+
+import "Country.proto";
+
+option java_package = "com.sequsoft.bufmark.protobuf";
+option java_multiple_files = true;
+
+message Address {
+    repeated string addressLine = 1;
+    string locality = 2;
+    string region = 3;
+    string postcode = 4;
+    Country country = 5;
+}

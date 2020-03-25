@@ -1,0 +1,16 @@
+syntax = "proto3";
+package com.sequsoft.bufmark.protobuf;
+
+import "google/protobuf/timestamp.proto";
+import "Sex.proto";
+
+option java_package = "com.sequsoft.bufmark.protobuf";
+option java_multiple_files = true;
+
+message Person {
+  string id = 1;
+  string name = 2;
+  Sex sex = 3;
+  google.protobuf.Timestamp dateOfBirth = 4;
+  string about = 5;
+}
