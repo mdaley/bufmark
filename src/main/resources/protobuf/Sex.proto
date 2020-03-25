@@ -5,7 +5,8 @@ option java_package = "com.sequsoft.bufmark.protobuf";
 option java_multiple_files = true;
 
 enum Sex {
-  MALE = 0;
-  FEMALE = 1;
-  NEUTRAL = 2;
+  SEX_UNSET = 0;
+  MALE = 1;
+  FEMALE = 2;
+  NEUTRAL = 3;
 }

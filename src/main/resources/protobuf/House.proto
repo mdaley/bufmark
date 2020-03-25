@@ -8,6 +8,7 @@ option java_package = "com.sequsoft.bufmark.protobuf";
 option java_multiple_files = true;
 
 message House {
-    Address address = 1;
-    repeated Person occupants = 2;
+    string id = 1;
+    Address address = 2;
+    repeated Person occupants = 3;
 }
