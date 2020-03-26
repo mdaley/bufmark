@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 
 public class Utils {
 
-    private static Sex convertSex(com.sequsoft.bufmark.common.Sex incoming) {
-        return Sex.valueOf(incoming.toString());
+    private static com.sequsoft.bufmark.protobuf.Sex convertSex(com.sequsoft.bufmark.common.Sex incoming) {
+        return com.sequsoft.bufmark.protobuf.Sex.valueOf(incoming.toString());
     }
 
-    private static Country convertCountry(com.sequsoft.bufmark.common.Country incoming) {
-        return Country.valueOf(incoming.toString());
+    private static com.sequsoft.bufmark.protobuf.Country convertCountry(com.sequsoft.bufmark.common.Country incoming) {
+        return com.sequsoft.bufmark.protobuf.Country.valueOf(incoming.toString());
     }
 
     private static Timestamp convertZonedDateTime(ZonedDateTime incoming) {
@@ -38,8 +38,8 @@ public class Utils {
         }
     }
 
-    public static Person convertPerson(com.sequsoft.bufmark.common.Person incoming) {
-        Person.Builder builder = Person.newBuilder()
+    public static com.sequsoft.bufmark.protobuf.Person convertPerson(com.sequsoft.bufmark.common.Person incoming) {
+        com.sequsoft.bufmark.protobuf.Person.Builder builder = com.sequsoft.bufmark.protobuf.Person.newBuilder()
                 .setId(nullSafe(incoming.getId()))
                 .setName(nullSafe(incoming.getName()))
                 .setAbout(nullSafe(incoming.getAbout()));
@@ -50,12 +50,12 @@ public class Utils {
         return builder.build();
     }
 
-    public static List<Person> convertPeople(List<com.sequsoft.bufmark.common.Person> people) {
+    public static List<com.sequsoft.bufmark.protobuf.Person> convertPeople(List<com.sequsoft.bufmark.common.Person> people) {
         return people.stream().map(Utils::convertPerson).collect(Collectors.toList());
     }
 
-    public static Address convertAddress(com.sequsoft.bufmark.common.Address incoming) {
-        Address.Builder builder = Address.newBuilder()
+    public static com.sequsoft.bufmark.protobuf.Address convertAddress(com.sequsoft.bufmark.common.Address incoming) {
+        com.sequsoft.bufmark.protobuf.Address.Builder builder = com.sequsoft.bufmark.protobuf.Address.newBuilder()
                 .setId(nullSafe(incoming.getId()))
                 .setLocality(nullSafe(incoming.getLocality()))
                 .setPostcode(nullSafe(incoming.getPostcode()));
@@ -65,20 +65,20 @@ public class Utils {
         return builder.build();
     }
 
-    public static House convertHouse(com.sequsoft.bufmark.common.House incoming) {
-        return House.newBuilder()
+    public static com.sequsoft.bufmark.protobuf.House convertHouse(com.sequsoft.bufmark.common.House incoming) {
+        return com.sequsoft.bufmark.protobuf.House.newBuilder()
                 .setId(nullSafe(incoming.getId()))
                 .setAddress(convertAddress(incoming.getAddress()))
                 .addAllOccupants(convertPeople(incoming.getOccupants()))
                 .build();
     }
 
-    public static List<House> convertHouses(List<com.sequsoft.bufmark.common.House> houses) {
+    public static List<com.sequsoft.bufmark.protobuf.House> convertHouses(List<com.sequsoft.bufmark.common.House> houses) {
         return houses.stream().map(Utils::convertHouse).collect(Collectors.toList());
     }
 
-    public static HouseGroup convertHouseGroup(com.sequsoft.bufmark.common.HouseGroup incoming) {
-        return HouseGroup.newBuilder()
+    public static com.sequsoft.bufmark.protobuf.HouseGroup convertHouseGroup(com.sequsoft.bufmark.common.HouseGroup incoming) {
+        return com.sequsoft.bufmark.protobuf.HouseGroup.newBuilder()
                 .setId(nullSafe(incoming.getId()))
                 .addAllHouses(convertHouses(incoming.getHouses()))
                 .addAllOrganisers((convertPeople(incoming.getOrganisers())))

@@ -1,0 +1,10 @@
+include "Person.fbs";
+include "Address.fbs";
+
+namespace com.sequsoft.bufmark.flatbuffers;
+
+table House {
+    id:string;
+    address:Address;
+    occupants:[Person];
+}

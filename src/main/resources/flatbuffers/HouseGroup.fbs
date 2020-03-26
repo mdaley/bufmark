@@ -1,0 +1,11 @@
+include "House.fbs";
+
+namespace com.sequsoft.bufmark.flatbuffers;
+
+table HouseGroup {
+    id:string;
+    houses:[House];
+    organisers:[Person];
+}
+
+root_type HouseGroup;
