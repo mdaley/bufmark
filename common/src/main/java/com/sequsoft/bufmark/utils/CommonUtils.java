@@ -1,5 +1,8 @@
 package com.sequsoft.bufmark.utils;
 
+import static java.lang.System.nanoTime;
+import static java.time.Instant.now;
+
 import com.sequsoft.bufmark.model.Address;
 import com.sequsoft.bufmark.model.Country;
 import com.sequsoft.bufmark.model.House;
@@ -7,6 +10,7 @@ import com.sequsoft.bufmark.model.HouseGroup;
 import com.sequsoft.bufmark.model.Person;
 import com.sequsoft.bufmark.model.Sex;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -151,5 +155,11 @@ public class CommonUtils {
         int d = RANDOM.nextInt(daysInMonth(m)) + 1;;
         ZoneId z = ZoneId.of("UTC");
         return ZonedDateTime.of(LocalDateTime.of(LocalDate.of(y, m, d), LocalTime.of(0, 0)), z);
+    }
+
+    public static long time(Runnable runner) {
+        long start = nanoTime();
+        runner.run();
+        return nanoTime() - start;
     }
 }
