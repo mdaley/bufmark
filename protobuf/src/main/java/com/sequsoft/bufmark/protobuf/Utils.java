@@ -1,11 +1,11 @@
 package com.sequsoft.bufmark.protobuf;
 
-import com.sequsoft.bufmark.common.Address;
-import com.sequsoft.bufmark.common.Country;
-import com.sequsoft.bufmark.common.House;
-import com.sequsoft.bufmark.common.HouseGroup;
-import com.sequsoft.bufmark.common.Person;
-import com.sequsoft.bufmark.common.Sex;
+import com.sequsoft.bufmark.model.Address;
+import com.sequsoft.bufmark.model.Country;
+import com.sequsoft.bufmark.model.House;
+import com.sequsoft.bufmark.model.HouseGroup;
+import com.sequsoft.bufmark.model.Person;
+import com.sequsoft.bufmark.model.Sex;
 
 import com.google.protobuf.Message;
 import com.google.protobuf.Timestamp;

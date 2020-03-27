@@ -1,4 +1,4 @@
-package com.sequsoft.bufmark.common;
+package com.sequsoft.bufmark.model;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

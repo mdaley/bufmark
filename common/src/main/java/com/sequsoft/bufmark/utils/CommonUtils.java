@@ -1,4 +1,11 @@
-package com.sequsoft.bufmark.common;
+package com.sequsoft.bufmark.utils;
+
+import com.sequsoft.bufmark.model.Address;
+import com.sequsoft.bufmark.model.Country;
+import com.sequsoft.bufmark.model.House;
+import com.sequsoft.bufmark.model.HouseGroup;
+import com.sequsoft.bufmark.model.Person;
+import com.sequsoft.bufmark.model.Sex;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
