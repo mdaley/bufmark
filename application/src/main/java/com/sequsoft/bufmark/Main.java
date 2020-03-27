@@ -17,11 +17,15 @@ public class Main {
 
         BufferRunner fbr = new FlatbuffersRunner();
         Object fmodel = fbr.constructModel(commonModel);
-        fbr.interrogateModel(fmodel);
+        byte[] fser = fbr.serialize(fmodel);
+        Object fmodel_deser = fbr.deserialize(fser);
+        fbr.interrogateModel(fmodel_deser);
 
         BufferRunner pbr = new ProtobufRunner();
         Object pmodel = pbr.constructModel(commonModel);
-        pbr.interrogateModel(pmodel);
+        byte[] pser = pbr.serialize(pmodel);
+        Object pmodel_deser = pbr.deserialize(pser);
+        pbr.interrogateModel(pmodel_deser);
 
     }
 }

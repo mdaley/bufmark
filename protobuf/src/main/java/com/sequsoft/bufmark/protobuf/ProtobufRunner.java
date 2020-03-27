@@ -6,6 +6,8 @@ import static com.sequsoft.bufmark.utils.CommonUtils.randomHouseGroup;
 import com.sequsoft.bufmark.BufferRunner;
 import com.sequsoft.bufmark.model.HouseGroup;
 
+import com.google.protobuf.InvalidProtocolBufferException;
+
 import java.util.Optional;
 
 public class ProtobufRunner implements BufferRunner {
@@ -34,5 +36,21 @@ public class ProtobufRunner implements BufferRunner {
 
         int totalPeople = people + housePeople.get();
         System.out.println("PROTOBUF PEOPLE COUNT = " + totalPeople);
+    }
+
+    @Override
+    public byte[] serialize(Object model) {
+        P_HouseGroup houseGroup = (P_HouseGroup)model;
+
+        return houseGroup.toByteArray();
+    }
+
+    @Override
+    public Object deserialize(byte[] data) {
+        try {
+            return P_HouseGroup.parseFrom(data);
+        } catch (InvalidProtocolBufferException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

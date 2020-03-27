@@ -9,4 +9,8 @@ public interface BufferRunner {
     String modelToString(Object model);
 
     void interrogateModel(Object model);
+
+    byte[] serialize(Object model);
+
+    Object deserialize(byte[] data);
 }

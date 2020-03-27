@@ -91,12 +91,12 @@ public class Utils {
         return F_HouseGroup.createF_HouseGroup(fbb, id, houses, organisers);
     }
 
-    public static ByteBuffer createHouseGroupBuffer(HouseGroup houseGroup) {
+    public static byte[] createHouseGroupBuffer(HouseGroup houseGroup) {
         FlatBufferBuilder fbb = new FlatBufferBuilder();
         int offset = storeHouseGroup(fbb, houseGroup);
         fbb.finish(offset);
 
-        return fbb.dataBuffer();
+        return fbb.sizedByteArray();
     }
 
     private static int[] storeStrings(FlatBufferBuilder fbb, List<String> strs) {
