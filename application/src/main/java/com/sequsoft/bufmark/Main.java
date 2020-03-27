@@ -1,9 +1,8 @@
 package com.sequsoft.bufmark;
 
-
 import static com.sequsoft.bufmark.common.CommonUtils.randomHouseGroup;
-import static com.sequsoft.bufmark.flatbuffers.Utils.createHouseGroupBuffer;
-import static com.sequsoft.bufmark.protobuf.Utils.convertHouseGroup;
+
+import com.sequsoft.bufmark.flatbuffers.Utils;
 
 import java.nio.ByteBuffer;
 
@@ -12,7 +11,7 @@ public class Main {
         System.out.println("Hello");
 
         //System.out.println(convertHouseGroup(randomHouseGroup()));
-        ByteBuffer buf = createHouseGroupBuffer(randomHouseGroup());
+        ByteBuffer buf = Utils.createHouseGroupBuffer(randomHouseGroup());
         System.out.println(new String(buf.array()));
 
     }
