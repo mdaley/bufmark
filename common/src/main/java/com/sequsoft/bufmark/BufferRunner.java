@@ -1,6 +1,12 @@
 package com.sequsoft.bufmark;
 
+import com.sequsoft.bufmark.model.HouseGroup;
+
 public interface BufferRunner {
 
-    void constructModel();
+    Object constructModel(HouseGroup commonModel);
+
+    String modelToString(Object model);
+
+    void interrogateModel(Object model);
 }
