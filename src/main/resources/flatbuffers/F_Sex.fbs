@@ -1,6 +1,6 @@
 namespace com.sequsoft.bufmark.flatbuffers;
 
-enum Sex:int16 {
+enum F_Sex:int16 {
     UNSET,
     MALE,
     FEMALE,

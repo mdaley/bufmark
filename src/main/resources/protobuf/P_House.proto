@@ -1,15 +1,14 @@
 syntax = "proto3";
 package com.sequsoft.bufmark.protobuf;
 
-import "Country.proto";
+import "P_Address.proto";
+import "P_Person.proto";
 
 option java_package = "com.sequsoft.bufmark.protobuf";
 option java_multiple_files = true;
 
-message Address {
+message P_House {
     string id = 1;
-    repeated string addressLines = 2;
-    string locality = 3;
-    string postcode = 4;
-    Country country = 5;
+    P_Address address = 2;
+    repeated P_Person occupants = 3;
 }

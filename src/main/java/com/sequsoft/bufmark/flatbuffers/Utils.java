@@ -1,5 +1,12 @@
 package com.sequsoft.bufmark.flatbuffers;
 
+import com.sequsoft.bufmark.common.Address;
+import com.sequsoft.bufmark.common.Country;
+import com.sequsoft.bufmark.common.House;
+import com.sequsoft.bufmark.common.HouseGroup;
+import com.sequsoft.bufmark.common.Person;
+import com.sequsoft.bufmark.common.Sex;
+
 import com.google.flatbuffers.FlatBufferBuilder;
 
 import java.nio.ByteBuffer;
@@ -14,41 +21,41 @@ public class Utils {
 
     private static final Map<String, Short> COUNTRY_ENUM_MAP = buildCountryEnumMap();
 
-    private static short convertSex(com.sequsoft.bufmark.common.Sex sex) {
-        return SEX_ENUM_MAP.getOrDefault(sex.toString(), com.sequsoft.bufmark.flatbuffers.Sex.UNSET);
+    private static short convertSex(Sex sex) {
+        return SEX_ENUM_MAP.getOrDefault(sex.toString(), F_Sex.UNSET);
     }
 
-    private static short convertCountry(com.sequsoft.bufmark.common.Country country) {
-        return COUNTRY_ENUM_MAP.getOrDefault(country.toString(), com.sequsoft.bufmark.flatbuffers.Country.UNSET);
+    private static short convertCountry(Country country) {
+        return COUNTRY_ENUM_MAP.getOrDefault(country.toString(), F_Country.UNSET);
     }
 
     private static String nullSafe(String s) {
         return s == null ? "" : s;
     }
 
-    private static int storePerson(FlatBufferBuilder fbb, com.sequsoft.bufmark.common.Person incoming) {
+    private static int storePerson(FlatBufferBuilder fbb, Person incoming) {
         int id = fbb.createString(incoming.getId());
         int name = fbb.createString(incoming.getName());
         short sex = convertSex(incoming.getSex());
         long dateOfBirth = incoming.getDateOfBirth().toEpochSecond();
         int about = fbb.createString(nullSafe(incoming.getAbout()));
 
-        return Person.createPerson(fbb, id, name, sex, dateOfBirth, about);
+        return F_Person.createF_Person(fbb, id, name, sex, dateOfBirth, about);
     }
 
-    private static int storeAddress(FlatBufferBuilder fbb, com.sequsoft.bufmark.common.Address incoming) {
+    private static int storeAddress(FlatBufferBuilder fbb, Address incoming) {
         int id = fbb.createString(incoming.getId());
 
-        int addressLines = Address.createAddressLinesVector(fbb, storeStrings(fbb, incoming.getAddressLines()));
+        int addressLines = F_Address.createAddressLinesVector(fbb, storeStrings(fbb, incoming.getAddressLines()));
 
         int locality = fbb.createString(incoming.getLocality());
         int postcode = fbb.createString(incoming.getPostcode());
         short country = convertCountry(incoming.getCountry());
 
-        return Address.createAddress(fbb, id, addressLines, locality, postcode, country);
+        return F_Address.createF_Address(fbb, id, addressLines, locality, postcode, country);
     }
 
-    private static int[] storePeople(FlatBufferBuilder fbb, List<com.sequsoft.bufmark.common.Person> people) {
+    private static int[] storePeople(FlatBufferBuilder fbb, List<Person> people) {
         int[] offsets = new int[people.size()];
 
         for (int i = 0; i < people.size(); i++) {
@@ -58,15 +65,15 @@ public class Utils {
         return offsets;
     }
 
-    private static int storeHouse(FlatBufferBuilder fbb, com.sequsoft.bufmark.common.House incoming) {
+    private static int storeHouse(FlatBufferBuilder fbb, House incoming) {
         int id = fbb.createString(incoming.getId());
         int address = storeAddress(fbb, incoming.getAddress());
-        int occupants = House.createOccupantsVector(fbb, storePeople(fbb, incoming.getOccupants()));
+        int occupants = F_House.createOccupantsVector(fbb, storePeople(fbb, incoming.getOccupants()));
 
-        return House.createHouse(fbb, id, address, occupants);
+        return F_House.createF_House(fbb, id, address, occupants);
     }
 
-    private static int[] storeHouses(FlatBufferBuilder fbb, List<com.sequsoft.bufmark.common.House> incoming) {
+    private static int[] storeHouses(FlatBufferBuilder fbb, List<House> incoming) {
         int[] offsets = new int[incoming.size()];
 
         for (int i = 0; i < incoming.size(); i++) {
@@ -76,15 +83,15 @@ public class Utils {
         return offsets;
     }
 
-    private static int storeHouseGroup(FlatBufferBuilder fbb, com.sequsoft.bufmark.common.HouseGroup incoming) {
+    private static int storeHouseGroup(FlatBufferBuilder fbb, HouseGroup incoming) {
         int id = fbb.createString(incoming.getId());
-        int houses = HouseGroup.createHousesVector(fbb, storeHouses(fbb, incoming.getHouses()));
-        int organisers = HouseGroup.createOrganisersVector(fbb, storePeople(fbb, incoming.getOrganisers()));
+        int houses = F_HouseGroup.createHousesVector(fbb, storeHouses(fbb, incoming.getHouses()));
+        int organisers = F_HouseGroup.createOrganisersVector(fbb, storePeople(fbb, incoming.getOrganisers()));
 
-        return HouseGroup.createHouseGroup(fbb, id, houses, organisers);
+        return F_HouseGroup.createF_HouseGroup(fbb, id, houses, organisers);
     }
 
-    public static ByteBuffer createHouseGroupBuffer(com.sequsoft.bufmark.common.HouseGroup houseGroup) {
+    public static ByteBuffer createHouseGroupBuffer(HouseGroup houseGroup) {
         FlatBufferBuilder fbb = new FlatBufferBuilder();
         int offset = storeHouseGroup(fbb, houseGroup);
         fbb.finish(offset);
@@ -103,9 +110,9 @@ public class Utils {
 
     private static Map<String, Short> buildSexEnumMap() {
         Map<String, Short> m = new HashMap<>();
-        for (short i = 0; i < Sex.names.length; i++) {
-            if (Sex.names[i] != null && !Sex.names[i].isEmpty()) {
-                m.put(Sex.names[i], i);
+        for (short i = 0; i < F_Sex.names.length; i++) {
+            if (F_Sex.names[i] != null && !F_Sex.names[i].isEmpty()) {
+                m.put(F_Sex.names[i], i);
             }
         }
         return m;
@@ -113,9 +120,9 @@ public class Utils {
 
     private static Map<String, Short> buildCountryEnumMap() {
         Map<String, Short> m = new HashMap<>();
-        for (short i = 0; i < Sex.names.length; i++) {
-            if (Country.names[i] != null && !Sex.names[i].isEmpty()) {
-                m.put(Sex.names[i], i);
+        for (short i = 0; i < F_Country.names.length; i++) {
+            if (F_Country.names[i] != null && !F_Country.names[i].isEmpty()) {
+                m.put(F_Country.names[i], i);
             }
         }
         return m;

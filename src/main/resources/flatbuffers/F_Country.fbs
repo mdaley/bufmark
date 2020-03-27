@@ -1,6 +1,6 @@
 namespace com.sequsoft.bufmark.flatbuffers;
 
-enum Country:int16 {
+enum F_Country:int16 {
     UNSET = 0,
     AFGHANISTAN = 1,
     ALBANIA = 2,

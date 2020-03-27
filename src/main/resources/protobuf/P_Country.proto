@@ -4,7 +4,7 @@ package com.sequsoft.bufmark.protobuf;
 option java_package = "com.sequsoft.bufmark.protobuf";
 option java_multiple_files = true;
 
-enum Country {
+enum P_Country {
     COUNTRY_UNSET = 0;
     AFGHANISTAN = 1;
     ALBANIA = 2;

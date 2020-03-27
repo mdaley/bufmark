@@ -1,11 +1,11 @@
-include "Country.fbs";
+include "F_Country.fbs";
 
 namespace com.sequsoft.bufmark.flatbuffers;
 
-table Address {
+table F_Address {
     id:string;
     addressLines:[string];
     locality:string;
     postcode:string;
-    country:Country;
+    country:F_Country;
 }

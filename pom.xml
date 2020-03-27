@@ -62,7 +62,7 @@
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>target/protobuf-sources/main/java</outputDirectory>
+                                    <outputDirectory>target/protobuf-sources/</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
@@ -118,12 +118,12 @@
                         <argument>--gen-mutable</argument>
                         <argument>-o</argument>
                         <argument>${fbs.generated.sources}</argument>
-                        <argument>Sex.fbs</argument>
-                        <argument>Country.fbs</argument>
-                        <argument>Person.fbs</argument>
-                        <argument>Address.fbs</argument>
-                        <argument>House.fbs</argument>
-                        <argument>HouseGroup.fbs</argument>
+                        <argument>F_Sex.fbs</argument>
+                        <argument>F_Country.fbs</argument>
+                        <argument>F_Person.fbs</argument>
+                        <argument>F_Address.fbs</argument>
+                        <argument>F_House.fbs</argument>
+                        <argument>F_HouseGroup.fbs</argument>
                     </arguments>
                 </configuration>
             </plugin>

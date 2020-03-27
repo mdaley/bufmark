@@ -1,14 +1,12 @@
 syntax = "proto3";
 package com.sequsoft.bufmark.protobuf;
 
-import "Address.proto";
-import "Person.proto";
-
 option java_package = "com.sequsoft.bufmark.protobuf";
 option java_multiple_files = true;
 
-message House {
-    string id = 1;
-    Address address = 2;
-    repeated Person occupants = 3;
+enum P_Sex {
+  SEX_UNSET = 0;
+  MALE = 1;
+  FEMALE = 2;
+  NEUTRAL = 3;
 }
