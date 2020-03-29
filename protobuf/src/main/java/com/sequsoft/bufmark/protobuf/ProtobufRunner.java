@@ -1,7 +1,6 @@
 package com.sequsoft.bufmark.protobuf;
 
-import static com.sequsoft.bufmark.protobuf.Utils.convertHouseGroup;
-import static com.sequsoft.bufmark.utils.CommonUtils.randomHouseGroup;
+import static com.sequsoft.bufmark.protobuf.Packer.convertHouseGroup;
 
 import com.sequsoft.bufmark.BufferRunner;
 import com.sequsoft.bufmark.model.HouseGroup;
@@ -52,5 +51,10 @@ public class ProtobufRunner implements BufferRunner {
         } catch (InvalidProtocolBufferException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public HouseGroup unpack(Object model) {
+        return Unpacker.unpack((P_HouseGroup) model);
     }
 }

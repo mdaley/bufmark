@@ -1,19 +1,14 @@
 package com.sequsoft.bufmark.flatbuffers;
 
-import static com.sequsoft.bufmark.utils.CommonUtils.randomHouseGroup;
-
 import com.sequsoft.bufmark.BufferRunner;
 import com.sequsoft.bufmark.model.HouseGroup;
-
-import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.flatbuffers.ByteBufferReadWriteBuf;
 
 import java.nio.ByteBuffer;
 
 public class FlatbuffersRunner implements BufferRunner {
     @Override
     public Object constructModel(HouseGroup commonModel) {
-        byte[] bytes = Utils.createHouseGroupBuffer(commonModel);
+        byte[] bytes = Packer.createHouseGroupBuffer(commonModel);
 
         return bytes;
     }
@@ -49,5 +44,10 @@ public class FlatbuffersRunner implements BufferRunner {
     @Override
     public Object deserialize(byte[] data) {
         return data;
+    }
+
+    @Override
+    public HouseGroup unpack(Object model) {
+        return Unpacker.unpack((byte[])model);
     }
 }

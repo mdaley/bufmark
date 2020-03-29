@@ -13,4 +13,6 @@ public interface BufferRunner {
     byte[] serialize(Object model);
 
     Object deserialize(byte[] data);
+
+    HouseGroup unpack(Object model);
 }

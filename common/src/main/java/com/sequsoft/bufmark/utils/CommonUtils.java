@@ -10,6 +10,9 @@ import com.sequsoft.bufmark.model.HouseGroup;
 import com.sequsoft.bufmark.model.Person;
 import com.sequsoft.bufmark.model.Sex;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+import javax.print.DocFlavor;
 
 public class CommonUtils {
     private static final Random RANDOM = new Random();
@@ -161,5 +167,25 @@ public class CommonUtils {
         long start = nanoTime();
         runner.run();
         return nanoTime() - start;
+    }
+
+    public static byte[] compress(byte[] data) {
+        try (ByteArrayOutputStream b = new ByteArrayOutputStream();
+             GZIPOutputStream gz = new GZIPOutputStream(b)) {
+            gz.write(data);
+            gz.close();
+            return b.toByteArray();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] decompress(byte[] data) {
+        try (ByteArrayInputStream b = new ByteArrayInputStream(data);
+             GZIPInputStream gz = new GZIPInputStream(b)) {
+            return gz.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

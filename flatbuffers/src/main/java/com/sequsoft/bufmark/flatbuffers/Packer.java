@@ -9,13 +9,11 @@ import com.sequsoft.bufmark.model.Sex;
 
 import com.google.flatbuffers.FlatBufferBuilder;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Utils {
-
+public class Packer {
 
     public static final Map<String, Short> SEX_ENUM_MAP = buildSexEnumMap();
 

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class Utils {
+public class Packer {
 
     private static P_Sex convertSex(Sex incoming) {
         return P_Sex.valueOf(incoming.toString());
@@ -58,7 +58,7 @@ public class Utils {
     }
 
     public static List<P_Person> convertPeople(List<Person> people) {
-        return people.stream().map(Utils::convertPerson).collect(Collectors.toList());
+        return people.stream().map(Packer::convertPerson).collect(Collectors.toList());
     }
 
     public static P_Address convertAddress(Address incoming) {
@@ -81,7 +81,7 @@ public class Utils {
     }
 
     public static List<P_House> convertHouses(List<House> houses) {
-        return houses.stream().map(Utils::convertHouse).collect(Collectors.toList());
+        return houses.stream().map(Packer::convertHouse).collect(Collectors.toList());
     }
 
     public static P_HouseGroup convertHouseGroup(HouseGroup incoming) {
