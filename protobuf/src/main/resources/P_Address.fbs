@@ -1,0 +1,14 @@
+// Generated from P_Address.proto
+
+include "P_Country.fbs";
+
+namespace com.sequsoft.bufmark.protobuf;
+
+table P_Address {
+  id:string;
+  addressLines:[string];
+  locality:string;
+  postcode:string;
+  country:com.sequsoft.bufmark.protobuf.P_Country;
+}
+

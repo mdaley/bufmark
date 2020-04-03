@@ -1,5 +1,6 @@
 include "F_Person.fbs";
 include "F_Address.fbs";
+include "F_Metadata.fbs";
 
 namespace com.sequsoft.bufmark.flatbuffers;
 
@@ -7,4 +8,5 @@ table F_House {
     id:string;
     address:F_Address;
     occupants:[F_Person];
+    metadata:[F_Metadata];
 }

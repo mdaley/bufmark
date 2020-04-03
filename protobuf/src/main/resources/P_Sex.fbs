@@ -1,0 +1,11 @@
+// Generated from P_Sex.proto
+
+namespace com.sequsoft.bufmark.protobuf;
+
+enum P_Sex : int {
+  SEX_UNSET = 0,
+  MALE = 1,
+  FEMALE = 2,
+  NEUTRAL = 3,
+}
+

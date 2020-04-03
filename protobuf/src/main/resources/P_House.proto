@@ -11,4 +11,5 @@ message P_House {
     string id = 1;
     P_Address address = 2;
     repeated P_Person occupants = 3;
+    map<string, string> metadata = 4;
 }

@@ -12,7 +12,6 @@ public class Address {
     private Country country;
 
     private Address() {
-
     }
 
     public static Address newAddress() {

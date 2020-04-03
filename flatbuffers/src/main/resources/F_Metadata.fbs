@@ -1,0 +1,6 @@
+namespace com.sequsoft.bufmark.flatbuffers;
+
+table F_Metadata {
+    key:string(key);
+    value:string;
+}

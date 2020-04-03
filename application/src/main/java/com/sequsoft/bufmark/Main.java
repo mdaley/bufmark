@@ -4,7 +4,6 @@ import static com.sequsoft.bufmark.utils.CommonUtils.randomHouseGroup;
 import static com.sequsoft.bufmark.utils.CommonUtils.time;
 
 import com.sequsoft.bufmark.flatbuffers.FlatbuffersRunner;
-import com.sequsoft.bufmark.flatbuffers.Unpacker;
 import com.sequsoft.bufmark.model.HouseGroup;
 import com.sequsoft.bufmark.protobuf.ProtobufRunner;
 import com.sequsoft.bufmark.utils.CommonUtils;
@@ -25,7 +24,7 @@ public class Main {
             Object fmodel_deser = fbr.deserialize(uncompressed);
             fbr.interrogateModel(fmodel_deser);
             HouseGroup hg = fbr.unpack(fmodel_deser);
-            //System.out.println(hg);
+            System.out.println(hg);
         });
 
         System.out.println("FLATBUFFERS TIME = " + felapsed / 1000000 + "ms.");

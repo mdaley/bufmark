@@ -14,7 +14,9 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Unpacker {
 
@@ -60,9 +62,20 @@ public class Unpacker {
         House house = House.newHouse()
                 .withAddress(unpackAddress(h.address()))
                 .withId(h.id())
-                .withOccupants(unpackPeople(h));
+                .withOccupants(unpackPeople(h))
+                .withMetadata(unpackMetadata(h.metadataVector()));
 
         return house;
+    }
+
+    private static Map<String, String> unpackMetadata(F_Metadata.Vector vector) {
+        Map<String, String> metadata = new HashMap<>();
+        for (int i = 0; i < vector.length(); i++) {
+            F_Metadata m = vector.get(i);
+            metadata.put(m.key(), m.value());
+        }
+
+        return metadata;
     }
 
     private static Address unpackAddress(F_Address a) {

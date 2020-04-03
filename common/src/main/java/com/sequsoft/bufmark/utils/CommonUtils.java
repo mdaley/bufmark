@@ -1,7 +1,6 @@
 package com.sequsoft.bufmark.utils;
 
 import static java.lang.System.nanoTime;
-import static java.time.Instant.now;
 
 import com.sequsoft.bufmark.model.Address;
 import com.sequsoft.bufmark.model.Country;
@@ -10,26 +9,43 @@ import com.sequsoft.bufmark.model.HouseGroup;
 import com.sequsoft.bufmark.model.Person;
 import com.sequsoft.bufmark.model.Sex;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.Instant;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Supplier;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import javax.print.DocFlavor;
 
 public class CommonUtils {
     private static final Random RANDOM = new Random();
+
+    private static final List<String> METADATA = ((Supplier<List<String>>)() -> {
+        try (InputStream stream = CommonUtils.class.getClassLoader().getResourceAsStream("shakespeare.txt")) {
+            return Arrays.asList(new String(stream.readAllBytes(), StandardCharsets.UTF_8).split("\\s+"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }).get();
 
     private static final List<String> FIRST_NAMES = List.of("Matt", "Mark", "Lyra", "Ranesh", "Mary", "Marmaduke", "Theresa",
             "Samuel", "Georgina", "Archibald");
@@ -98,7 +114,8 @@ public class CommonUtils {
         return House.newHouse()
                 .withId(randomGUID())
                 .withAddress(randomAddress())
-                .withOccupants(randomPeople());
+                .withOccupants(randomPeople())
+                .withMetadata(randomMetadata());
     }
 
     public static List<House> randomHouses() {
@@ -187,5 +204,28 @@ public class CommonUtils {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static Pair<String, String> randomMetadataPair() {
+        int keySize = RANDOM.nextInt(3) + 1;
+        int valueSize = RANDOM.nextInt(20) + 1;
+        int keyIndex = RANDOM.nextInt(METADATA.size() - keySize - 1);
+        keyIndex = (keyIndex < 0) ? 0 : keyIndex;
+        int valueIndex = RANDOM.nextInt(METADATA.size() - valueSize - 1);
+        valueIndex = (valueIndex < 0) ? 0 : valueIndex;
+        String key = String.join(" ", METADATA.subList(keyIndex, keyIndex + keySize));
+        String value = String.join(" ", METADATA.subList(valueIndex, valueIndex + valueSize));
+
+        return ImmutablePair.of(key, value);
+    }
+
+    private static Map<String, String> randomMetadata() {
+        Map<String, String> metadata = new HashMap<>();
+        for (int i = 0; i < RANDOM.nextInt(10) + 1; i++) {
+            Pair<String, String> entry = randomMetadataPair();
+            metadata.put(entry.getLeft(), entry.getRight());
+        }
+
+        return metadata;
     }
 }

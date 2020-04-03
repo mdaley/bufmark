@@ -77,6 +77,7 @@ public class Packer {
                 .setId(nullSafe(incoming.getId()))
                 .setAddress(convertAddress(incoming.getAddress()))
                 .addAllOccupants(convertPeople(incoming.getOccupants()))
+                .putAllMetadata(incoming.getMetadata())
                 .build();
     }
 

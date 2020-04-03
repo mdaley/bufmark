@@ -3,14 +3,15 @@ package com.sequsoft.bufmark.model;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 public class House {
     private String id;
     private Address address;
     private List<Person> occupants;
+    private Map<String, String> metadata;
 
     private House() {
-
     }
 
     public static House newHouse() {
@@ -45,12 +46,22 @@ public class House {
         return occupants;
     }
 
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public House withMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("address", address)
                 .append("occupants", occupants)
+                .append("metadata", metadata)
                 .toString();
     }
 }

@@ -38,7 +38,8 @@ public class Unpacker {
                 .withId(incoming.getId())
                 .withAddress(unpackAddress(incoming.getAddress()))
                 .withOccupants(incoming.getOccupantsList().stream()
-                        .map(Unpacker::unpackPerson).collect(Collectors.toList()));
+                        .map(Unpacker::unpackPerson).collect(Collectors.toList()))
+                .withMetadata(incoming.getMetadataMap());
     }
 
     public static HouseGroup unpack(P_HouseGroup incoming) {

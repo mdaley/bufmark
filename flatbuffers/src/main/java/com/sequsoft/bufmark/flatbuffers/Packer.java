@@ -63,12 +63,20 @@ public class Packer {
         return offsets;
     }
 
+    private static int[] storeMetadata(FlatBufferBuilder fbb, Map<String, String> metadata) {
+        return metadata.entrySet().stream()
+                .mapToInt(kv ->
+                        F_Metadata.createF_Metadata(fbb, fbb.createString(kv.getKey()), fbb.createString(kv.getValue())))
+                .toArray();
+    }
+
     private static int storeHouse(FlatBufferBuilder fbb, House incoming) {
         int id = fbb.createString(incoming.getId());
         int address = storeAddress(fbb, incoming.getAddress());
         int occupants = F_House.createOccupantsVector(fbb, storePeople(fbb, incoming.getOccupants()));
+        int metadata = fbb.createSortedVectorOfTables(new F_Metadata(), storeMetadata(fbb, incoming.getMetadata()));
 
-        return F_House.createF_House(fbb, id, address, occupants);
+        return F_House.createF_House(fbb, id, address, occupants, metadata);
     }
 
     private static int[] storeHouses(FlatBufferBuilder fbb, List<House> incoming) {

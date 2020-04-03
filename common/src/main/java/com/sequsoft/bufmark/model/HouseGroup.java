@@ -8,7 +8,6 @@ public class HouseGroup {
     private List<Person> organisers;
 
     private HouseGroup() {
-
     }
 
     public static HouseGroup newHouseGroup() {

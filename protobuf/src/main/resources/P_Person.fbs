@@ -1,0 +1,15 @@
+// Generated from P_Person.proto
+
+include "P_Sex.fbs";
+include "timestamp.fbs";
+
+namespace com.sequsoft.bufmark.protobuf;
+
+table P_Person {
+  id:string;
+  name:string;
+  sex:com.sequsoft.bufmark.protobuf.P_Sex;
+  dateOfBirth:google.protobuf.Timestamp;
+  about:string;
+}
+
